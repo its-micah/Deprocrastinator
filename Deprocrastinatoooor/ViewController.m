@@ -13,7 +13,8 @@
 <
 UITableViewDelegate,
 UITableViewDataSource,
-UIGestureRecognizerDelegate
+UIGestureRecognizerDelegate,
+UIAlertViewDelegate
 >
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -22,6 +23,7 @@ UIGestureRecognizerDelegate
 @property NSString *enteredText;
 //@property (weak, nonatomic) IBOutlet UITableViewCell *cell;
 @property CGPoint pointTapped;
+@property BOOL shouldWeDelete;
 
 @end
 
@@ -32,6 +34,7 @@ UIGestureRecognizerDelegate
     self.enteredData = [NSMutableArray new];
     UIGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
     swipeRight.delegate = self;
+    self.shouldWeDelete = false;
 
     [self.tableView addGestureRecognizer:swipeRight];
     //[self.tableView addGestureRecognizer:swipeRight];
@@ -72,7 +75,29 @@ UIGestureRecognizerDelegate
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.enteredData removeObjectAtIndex:indexPath.row];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WOAH" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
+    [alertView show];
+        [self.enteredData removeObjectAtIndex:indexPath.row];
+        self.shouldWeDelete = false;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        [self.enteredData removeObject:indexPath];
+        self.shouldWeDelete = true;
+        [self.tableView reloadData];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    NSString *tempString = [self.enteredData objectAtIndex:sourceIndexPath.row];
+    [self.enteredData removeObject:tempString];
+    [self.enteredData addObject:tempString];
     [self.tableView reloadData];
 }
 
@@ -98,9 +123,16 @@ UIGestureRecognizerDelegate
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
     if (indexPath) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        cell.backgroundColor = [UIColor greenColor];
+        //cell.textLabel.textColor = [UIColor blackColor];
+        if (cell.textLabel.textColor == [UIColor blackColor]) {
+            cell.textLabel.textColor = [UIColor greenColor];
+        } else if (cell.textLabel.textColor == [UIColor greenColor]) {
+            cell.textLabel.textColor = [UIColor yellowColor];
+    } else if (cell.textLabel.textColor == [UIColor yellowColor]) {
+        cell.textLabel.textColor = [UIColor redColor];
     }
 
+}
 }
 
 
