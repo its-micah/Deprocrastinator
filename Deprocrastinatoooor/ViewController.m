@@ -30,7 +30,11 @@ UIGestureRecognizerDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.enteredData = [NSMutableArray new];
-    [self swipeRight];
+    UIGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
+    swipeRight.delegate = self;
+
+    [self.tableView addGestureRecognizer:swipeRight];
+    //[self.tableView addGestureRecognizer:swipeRight];
 
 }
 
@@ -88,11 +92,15 @@ UIGestureRecognizerDelegate
     }
 }
 
-- (BOOL)swipeRight {
+- (void)swipeRight:(UIGestureRecognizer *)gesture {
 
-    UIGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self.tableView.subviews action:@selector(selector)];
-    [self.tableView addGestureRecognizer:swipeRight];
-    return YES;
+    CGPoint location = [gesture locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    if (indexPath) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        cell.backgroundColor = [UIColor greenColor];
+    }
+
 }
 
 
