@@ -7,7 +7,6 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
@@ -50,10 +49,10 @@
                                 <exclude reference="Txe-Om-sNj"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="pP8-2b-G5O"/>
                                 <exclude reference="7Ua-lA-nhz"/>
                                 <exclude reference="8zi-VM-AS8"/>
                                 <exclude reference="EhV-pV-lxD"/>
-                                <exclude reference="pP8-2b-G5O"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -61,10 +60,10 @@
                                 <include reference="Txe-Om-sNj"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="pP8-2b-G5O"/>
                                 <include reference="7Ua-lA-nhz"/>
                                 <include reference="8zi-VM-AS8"/>
                                 <include reference="EhV-pV-lxD"/>
-                                <include reference="pP8-2b-G5O"/>
                             </mask>
                         </variation>
                     </view>
@@ -81,7 +80,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="eT8-tG-Lr9">
+                        <barButtonItem key="rightBarButtonItem" id="eT8-tG-Lr9">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Zg-KP-zdt">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -99,8 +98,9 @@
                         <outlet property="textField" destination="M00-Mh-2NQ" id="CGf-bQ-wQA"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1393.5" y="344"/>
+            <point key="canvasLocation" x="1323" y="344"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bLA-ZQ-L5C">
